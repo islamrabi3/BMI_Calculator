@@ -1,11 +1,13 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:bmi/constance/const.dart';
+import 'package:bmi/cubit/cubit.dart';
 import 'package:bmi/result_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class BmiScreen extends StatefulWidget {
-  const BmiScreen({Key? key}) : super(key: key);
-
   @override
   _BmiScreenState createState() => _BmiScreenState();
 }
@@ -22,18 +24,30 @@ class _BmiScreenState extends State<BmiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: IconButton(
+                onPressed: () => setState(() {
+                      AppCubit.get(context).changeLightTheme();
+                    }),
+                icon: Icon(Icons.light)),
+          )
+        ],
         title: Text('Bmi Calculator'),
       ),
-      body: Column(
-        children: [
-          genderSection(),
-          heightSection(),
-          weightAndAge(),
-          SizedBox(
-            height: 20.0,
-          ),
-          buildCalculateButton(context)
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            genderSection(),
+            heightSection(),
+            weightAndAge(),
+            SizedBox(
+              height: 20.0,
+            ),
+            buildCalculateButton(context)
+          ],
+        ),
       ),
     );
   }
@@ -104,6 +118,7 @@ class _BmiScreenState extends State<BmiScreen> {
             ),
             Expanded(
               child: Container(
+                width: MediaQuery.of(context).size.height * .25,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.0),
                   color: inActiveColor,
@@ -292,7 +307,10 @@ class _BmiScreenState extends State<BmiScreen> {
                       )));
         });
       },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.orangeAccent)),
       child: Container(
+        color: HexColor('d38919'),
         width: double.infinity,
         height: 60.0,
         child: Padding(
