@@ -20,7 +20,7 @@ final darkThemeData = ThemeData(
     toolbarHeight: 100.0,
   ),
   androidOverscrollIndicator: AndroidOverscrollIndicator.glow,
-  canvasColor: Colors.white,
+  canvasColor: Colors.black26,
   sliderTheme: SliderThemeData(
       activeTrackColor: Colors.orangeAccent,
       inactiveTrackColor: Colors.black26,
